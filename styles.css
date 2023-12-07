@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 97vh; 
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+#chat-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  overflow-y: auto;
+  flex-grow: 1; /* Take up all available space */
+}
+
+.message-bubble {
+  background-color: #DCF8C6; /* Light green, similar to WhatsApp */
+  max-width: 70%; /*The maximum width will not exceed 70% of the width of the parent element*/
+  width: fit-content; /* The width will be as wide as the content inside */
+  margin: 5px;
+  margin-left: auto; /* Align to the right */
+  padding: 10px;
+  border-radius: 10px; /* Border rounded corners */
+  word-wrap: break-word; /* Prevent text from overflowing */
+  display: block; /* Make elements appear as blocks */
+  text-align: right; /* Align text to the right */
+}
+
+.message-text {
+  color: black; 
+}
+
+#bottom-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#message-input {
+  width: calc(100% - 90px); /* Take up all available space minus 90px */
+  margin: 0;
+  resize: none; /* Prevent users from manually changing the size */
+  overflow-y: auto; /* Show scrollbar when there is too much content */
+  max-height: 200px; /* Set maximum height */
+}
+
+#send-button {
+  width: 80px;
+}
+
+#input-area {
+  display: flex;
+  justify-content: space-between; /* Align elements to the left and right */
+  margin-top: 10px;
+}
+
+footer {
+  color: gray;
+  text-align: center;
+  margin-top: 10px;
+  display: block;
+}
