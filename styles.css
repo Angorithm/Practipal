@@ -50,9 +50,30 @@ body {
   flex-direction: column;
 }
 
+#input-area {
+  display: flex;
+  justify-content: space-between; /* Align elements to the left and right */
+  align-items: center; /* Align elements vertically */
+  margin-top: 10px;
+}
+
+#image-button {
+  width: 30px; 
+  height: 40px; 
+  margin-right: 10px;
+  font-size:30px;
+  line-height:40px; /* Set the row height to be the same as the button */
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  overflow:hidden;
+  vertical-align: middle;
+  cursor:pointer;
+}
+
 #message-input {
-  width: calc(100% - 90px); /* Take up all available space minus 90px */
-  margin: 0;
+  flex-grow: 1; /* Take up all available space */
+  margin: 0 10px; /* Add some space between the input and the button */
   resize: none; /* Prevent users from manually changing the size */
   overflow-y: auto; /* Show scrollbar when there is too much content */
   max-height: 200px; /* Set maximum height */
@@ -60,12 +81,7 @@ body {
 
 #send-button {
   width: 80px;
-}
-
-#input-area {
-  display: flex;
-  justify-content: space-between; /* Align elements to the left and right */
-  margin-top: 10px;
+  height:40px;
 }
 
 footer {
