@@ -21,16 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const message = messageInput.value.trim();
       if (message) {
         /* Create a new `div` element to serve as the container for the message, and place the text message into another `div` to achieve a bubble effect.*/
-        const messageBubble = document.createElement('div');
-        messageBubble.className = 'message-bubble';
+        const userMessageBubble = document.createElement('div');
+        userMessageBubble.className = 'user-message-bubble';
     
         const messageText = document.createElement('div');
         messageText.className = 'message-text';
         messageText.innerText = message;
         
         // Append the message bubble to the chat container
-        messageBubble.appendChild(messageText);
-        chatContainer.appendChild(messageBubble);
+        userMessageBubble.appendChild(messageText);
+        chatContainer.appendChild(userMessageBubble);
     
         messageInput.value = '';
         adjustTextAreaHeight(messageInput);

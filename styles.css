@@ -15,7 +15,8 @@ body {
   flex-grow: 1; /* Take up all available space */
 }
 
-.message-bubble {
+.user-message-bubble {
+  position:relative;
   background-color: #DCF8C6; /* Light green, similar to WhatsApp */
   max-width: 70%; /*The maximum width will not exceed 70% of the width of the parent element*/
   width: fit-content; /* The width will be as wide as the content inside */
@@ -26,6 +27,18 @@ body {
   word-wrap: break-word; /* Prevent text from overflowing */
   display: block; /* Make elements appear as blocks */
   text-align: right; /* Align text to the right */
+}
+
+.user-message-bubble::after {
+  content: "";
+  position: absolute;
+  width:0;
+  height:0;
+  top: 50%;
+  transform:translateY(-50%);/* Move it up by half its height */
+  right:-15px;
+  border: 10px solid transparent;
+  border-left-color: #DCF8C6; /* Same color as the container background */
 }
 
 .message-text {
