@@ -41,6 +41,32 @@ body {
   border-left-color: #DCF8C6; /* Same color as the container background */
 }
 
+.chatbot-message-bubble {
+  position:relative;
+  background-color: #F1F1F1; 
+  max-width: 70%; /*The maximum width will not exceed 70% of the width of the parent element*/
+  width: fit-content; /* The width will be as wide as the content inside */
+  margin: 5px;
+  margin-right: auto; /* Align to the left */
+  padding: 10px;
+  border-radius: 10px; /* Border rounded corners */
+  word-wrap: break-word; /* Prevent text from overflowing */
+  display: block; /* Make elements appear as blocks */
+  text-align: left; /* Align text to the left */
+}
+
+.chatbot-message-bubble::after {
+  content: "";
+  position: absolute;
+  width:0;
+  height:0;
+  top: 50%;
+  transform:translateY(-50%);/* Move it up by half its height */
+  left:-15px;
+  border: 10px solid transparent;
+  border-right-color: #F1F1F1; /* Same color as the container background */
+}
+
 .message-text {
   color: black; 
 }
