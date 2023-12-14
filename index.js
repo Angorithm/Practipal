@@ -15,29 +15,36 @@ document.addEventListener('DOMContentLoaded', () => {
           textarea.style.overflowY = 'hidden';
       }
   }
-  
+    // Add a function to add a message to the chat container
+    function addMessageToChatContainer(message, isUserMessage) {
+      const messageBubble = document.createElement('div');
+      messageBubble.className = isUserMessage ? 'user-message-bubble' : 'chatbot-message-bubble';
+
+      const messageText = document.createElement('div');
+      messageText.className = 'message-text';
+      messageText.innerText = message;
+
+      messageBubble.appendChild(messageText);
+      chatContainer.appendChild(messageBubble);
+
+      chatContainer.scrollTop = chatContainer.scrollHeight;}
+
     // Encapsulate the logic for sending messages into a function.
-    function sendMessage() {
-      const message = messageInput.value.trim();
-      if (message) {
-        /* Create a new `div` element to serve as the container for the message, and place the text message into another `div` to achieve a bubble effect.*/
-        const userMessageBubble = document.createElement('div');
-        userMessageBubble.className = 'user-message-bubble';
-    
-        const messageText = document.createElement('div');
-        messageText.className = 'message-text';
-        messageText.innerText = message;
-        
-        // Append the message bubble to the chat container
-        userMessageBubble.appendChild(messageText);
-        chatContainer.appendChild(userMessageBubble);
-    
-        messageInput.value = '';
-        adjustTextAreaHeight(messageInput);
-        // Scroll to the bottom of the chat container
-        chatContainer.scrollTop = chatContainer.scrollHeight;
-      }
-    }
+    async function sendMessage() {
+      const userMessage = messageInput.value.trim();
+      if (userMessage) {
+          addMessageToChatContainer(userMessage, true);
+          messageInput.value = '';
+          adjustTextAreaHeight(messageInput);
+
+          try {
+              const chatbotResponse = await window.electronAPI.getChatbotResponse(userMessage);
+              addMessageToChatContainer(chatbotResponse, false);
+          } catch (error) {
+              addMessageToChatContainer("Sorry, an error occurred while getting a response.", false);
+          }
+        }
+     }
   
     // Add event listener for send button
     sendButton.addEventListener('click', sendMessage);
