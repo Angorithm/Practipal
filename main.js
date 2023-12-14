@@ -30,8 +30,8 @@ function createWindow() {
 // This method will be called when Electron has finished initialization and is ready to create browser windows.
 app.on('ready', () => {
   createWindow();
-  ipcMain.handle('get-chatbot-response', async (event, userMessage) => {
-    return await getChatbotResponse(userMessage);
+  ipcMain.handle('get-chatbot-response', async (event, messageHistory) => {
+    return await getChatbotResponse(messageHistory);
   });
 });
 

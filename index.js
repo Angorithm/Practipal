@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
     const chatContainer = document.getElementById('chat-container');
+    let messageHistory = [{"role": "system", "content": "You are a helpful assistant."}];
 
     // Adjust the height of the textarea to match its content
     function adjustTextAreaHeight(textarea) {
@@ -33,12 +34,14 @@ document.addEventListener('DOMContentLoaded', () => {
     async function sendMessage() {
       const userMessage = messageInput.value.trim();
       if (userMessage) {
+          messageHistory.push({"role": "user", "content": userMessage});
           addMessageToChatContainer(userMessage, true);
           messageInput.value = '';
           adjustTextAreaHeight(messageInput);
 
           try {
-              const chatbotResponse = await window.electronAPI.getChatbotResponse(userMessage);
+              const chatbotResponse = await window.electronAPI.getChatbotResponse(messageHistory);
+              messageHistory.push({"role": "assistant", "content": chatbotResponse});
               addMessageToChatContainer(chatbotResponse, false);
           } catch (error) {
               addMessageToChatContainer("Sorry, an error occurred while getting a response.", false);
