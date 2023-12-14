@@ -1,5 +1,7 @@
 // Import the objects 'app' and 'BrowserWindow' from 'electron'.
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain } = require('electron');
+const path = require('path');
+const {getChatbotResponse} = require('./chatbot');
 
 let mainWindow;
 
@@ -8,9 +10,11 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    // Enable Node.js to be used directly in web pages
+    
     webPreferences: {
-      nodeIntegration: true 
+      nodeIntegration: false,
+      contextIsolation: true,
+      preload: path.join(__dirname, 'preload.js')
     }
   });
 
@@ -24,7 +28,12 @@ function createWindow() {
 }
 
 // This method will be called when Electron has finished initialization and is ready to create browser windows.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  createWindow();
+  ipcMain.handle('get-chatbot-response', async (event, userMessage) => {
+    return await getChatbotResponse(userMessage);
+  });
+});
 
 app.on('window-all-closed', () => {
   // On macOS, unless the user exits with Cmd + Q,
